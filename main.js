@@ -1,50 +1,35 @@
-var names_of_people = [];
-    
-function submit()
+canvas = document.getElementById("myCanvas");
+color="red";
+ctx= canvas.getContext("2d");
+ctx.beginPath();
+ctx.strokeStyle=color;
+ctx.lineWidth = 2;
+ctx.arc(200,200,40,0,2*Math.PI);
+ctx.stroke();
+
+
+canvas.addEventListener("mousedown", my_mousedown);
+function my_mousedown(e)
 {
-    var GuestName = document.getElementById("name1").value;
-	// use the push function as - names_of_people.push(GuestName);
-	names_of_people.push(GuestName);
-	console.log(GuestName);    
-    console.log(names_of_people);
-    var lenght_of_name = names_of_people.length;
-    console.log(lenght_of_name);
-	document.getElementById("display_name").innerHTML=names_of_people.toString();
-   }
+    color=document.getElementById("color").value;
+    console.log(color);
+    mouse_x = e.clientX - canvas.offsetLeft;
+    mouse_y = e.clientY - canvas.offsetTop;
+    console.log("X = "+mouse_x+" ,y = "+mouse_y);
+    circle(mouse_x , mouse_y);
 
-
-
-function show()
-{
-	var i= names_of_people.join("<br>");
-	console.log(names_of_people);
-	document.getElementById("p1").innerHTML=i.toString();
-	document.getElementById("sort_button").style.display="block";
-	
 }
 
-
-function sorting()
-	{
-		names_of_people.sort();         // add the sort function here
-		// .sort();
-		var i= names_of_people.join("<br>");
-		console.log(names_of_people);		
-		document.getElementById("sorted").innerHTML=i.toString();
-		}
-
-
-function searching()
+function circle(mouse_x , mouse_y)
 {
-	var s= document.getElementById("s1").value;
-	var found=0;
-	var j;
-	for(j=0; j<names_of_people.length; j++)
-		{
-			if(s==names_of_people[j]){
-				found=found+1;
-			}	
-		}
-	document.getElementById("p2").innerHTML="name found "+found+" time/s";
-	console.log("found name "+found+" time/s");
+    ctx.beginPath();
+    ctx.strokeStyle=color;
+    ctx.lineWidth = 2;
+    ctx.arc(mouse_x, mouse_y,40,0,2*Math.PI);
+    ctx.stroke();
+}
+
+function clearArea() 
+{ 
+    ctx.clearRect(0, 0, canvas.width, canvas.height); 
 }
